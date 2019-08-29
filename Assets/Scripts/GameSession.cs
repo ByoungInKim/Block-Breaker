@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class GameSession: MonoBehaviour
 {
@@ -12,7 +13,23 @@ public class GameSession: MonoBehaviour
 
     // state variables
     [SerializeField] int currentScore = 0;
+    [SerializeField] bool isAutoPlayEnabled;
 
+    public bool IsAutoPlayEnabled()
+    {
+        return isAutoPlayEnabled;
+    }
+
+    public void AddToScore()
+    {
+        currentScore += scorePerBlockDestoryed;
+        scoreText.text = currentScore.ToString();
+    }
+
+    public void ResetGame()
+    {
+        Destroy(gameObject);
+    }
 
     private void Awake()
     {
@@ -37,16 +54,5 @@ public class GameSession: MonoBehaviour
     void Update()
     {
         Time.timeScale = gameSpeed;
-    }
-
-    public void AddToScore()
-    {
-        currentScore += scorePerBlockDestoryed;
-        scoreText.text = currentScore.ToString();
-    }
-
-    public void ResetGame()
-    {
-        Destroy(gameObject);
     }
 }
